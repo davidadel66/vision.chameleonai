@@ -1,8 +1,8 @@
 'use client';
-import { Button } from '@/app/ui/button';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-export default function Crypto() {
+export default function Screener() {
   return (
 
     <div className="flex flex-col items-center justify-center min-h-screen relative z-10">

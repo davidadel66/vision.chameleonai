@@ -8,7 +8,7 @@ import {
   ScreenerIcon, 
   EventsIcon,
   HomeIcon,
-} from '@/app/ui/dashboard/icons'
+} from '@/components/dashboard/icons'
 
 
 const links = [

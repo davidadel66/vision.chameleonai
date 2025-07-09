@@ -1,4 +1,4 @@
-import NavLinks from '@/app/ui/dashboard/nav-links';
+import NavLinks from '@/components/dashboard/nav-links';
 export default function SideNav() {
   return (
     <div className="group relative">
