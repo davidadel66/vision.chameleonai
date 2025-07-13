@@ -11,27 +11,6 @@ export const siteConfig = {
   creator: "ChameleonAI",
 }
 
-export const dashboardConfig = {
-  mainNav: [
-    {
-      title: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      title: "Screener",
-      href: "/dashboard/screener",
-    },
-    {
-      title: "Crypto",
-      href: "/dashboard/crypto",
-    },
-    {
-      title: "Events",
-      href: "/dashboard/events",
-    },
-  ],
-}
-
 export const apiConfig = {
   baseUrl: process.env.NEXT_PUBLIC_API_URL || "https://api.chameleonai.com",
   timeout: 10000,

@@ -16,13 +16,13 @@ const iconMap: Record<IconName, { src: string; alt: string }> = {
   events: { src: '/EventsIcon.ico', alt: 'Events' },
 };
 
-export function Icon({ name, className, width = 24, height = 24 }: IconProps) {
+export function Icon({ name, className, width = 48, height = 48 }: IconProps) {
   const iconInfo = iconMap[name];
   
   return (
     <Image
       src={iconInfo.src}
-      alt={iconInfo.alt}
+      alt={`${iconInfo.alt} Icon`}
       width={width}
       height={height}
       className={className}
