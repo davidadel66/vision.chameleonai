@@ -1,5 +1,5 @@
 'use client'
-import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Panel, PanelGroup } from "react-resizable-panels";
 import { useState } from 'react';
 import SideNav from '@/components/dashboard/sidenav';
 import Chat from '@/components/chat';

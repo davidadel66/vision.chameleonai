@@ -1,6 +1,5 @@
 import NavLinks from '@/components/dashboard/nav-links';
 
-import { Dispatch, SetStateAction } from 'react';
 
 interface SideNavProps {
   activeTab: string;
