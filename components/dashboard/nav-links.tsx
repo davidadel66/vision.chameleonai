@@ -3,12 +3,11 @@
 import clsx from 'clsx';
 import {
   CryptoIcon,
-  ScreenerIcon, 
+  ScreenerIcon,
   EventsIcon,
   HomeIcon,
 } from '@/components/dashboard/icons'
 
-import { Dispatch, SetStateAction } from 'react';
 
 interface NavLinksProps {
   activeTab: string;
