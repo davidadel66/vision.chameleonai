@@ -137,14 +137,20 @@ const PurePreviewMessage = ({
         <div
           className={cn(
             "flex gap-4 w-full group-data-[role=user]/message:ml-auto group-data-[role=user]/message:max-w-2xl",
-            "group-data-[role=user]/message:w-fit",
+            "group-data-[role=user]/message:w-fit group-data-[role=user]/message:flex-row-reverse",
           )}
         >
           {message.role === "assistant" && (
-            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background">
+            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-white/20 bg-blue-500/20 backdrop-blur-sm">
               <div className="">
-                <SparklesIcon size={14} />
+                <SparklesIcon size={14} className="text-blue-300" />
               </div>
+            </div>
+          )}
+
+          {message.role === "user" && (
+            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-white/20 bg-green-500/20 backdrop-blur-sm">
+              <div className="w-4 h-4 rounded-full bg-green-400"></div>
             </div>
           )}
 
@@ -161,8 +167,9 @@ const PurePreviewMessage = ({
                     >
                       <div
                         className={cn("flex flex-col gap-4", {
-                          "bg-secondary text-secondary-foreground px-3 py-2 rounded-tl-xl rounded-tr-xl rounded-bl-xl":
+                          "bg-green-500/10 backdrop-blur-sm text-white px-4 py-3 rounded-2xl border border-green-400/20":
                             message.role === "user",
+                          "text-white/90": message.role === "assistant",
                         })}
                       >
                         <Markdown>{part.text}</Markdown>

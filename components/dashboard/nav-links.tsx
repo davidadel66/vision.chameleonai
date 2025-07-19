@@ -39,7 +39,7 @@ const links = [
 
 export default function NavLinks({ activeTab, onTabChange }: NavLinksProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {links.map((link) => {
         const LinkIcon = link.icon;
         const isActive = activeTab === link.name.toLowerCase();
@@ -48,9 +48,10 @@ export default function NavLinks({ activeTab, onTabChange }: NavLinksProps) {
             <button
               onClick={() => onTabChange(link.name.toLowerCase())}
               className={clsx(
-                'flex items-center justify-center h-20 rounded-lg text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all duration-300',
+                'flex items-center justify-center h-16 w-full rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105',
                 {
-                  'bg-white/20 text-white': isActive,
+                  'bg-white/20 text-white shadow-lg backdrop-blur-sm border border-white/20': isActive,
+                  'text-white/70 hover:bg-white/10 hover:text-white hover:shadow-md backdrop-blur-sm': !isActive,
                 },
               )}
             >
@@ -58,8 +59,9 @@ export default function NavLinks({ activeTab, onTabChange }: NavLinksProps) {
                 <LinkIcon className="w-16 h-16" />
               )}
             </button>
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+            <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-3 px-3 py-2 bg-black/80 backdrop-blur-md text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-50 border border-white/10">
               {link.name}
+              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 w-2 h-2 bg-black/80 rotate-45 border-l border-b border-white/10"></div>
             </div>
           </div>
         );

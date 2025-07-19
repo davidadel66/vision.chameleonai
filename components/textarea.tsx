@@ -11,7 +11,6 @@ interface InputProps {
   status: string;
   stop: () => void;
   selectedModel: modelID;
-  setSelectedModel: (model: modelID) => void;
 
 }
 
@@ -21,13 +20,11 @@ export const Textarea = ({
   isLoading,
   status,
   stop,
-  selectedModel,
-  setSelectedModel,
 }: InputProps) => {
   return (
-    <div className="relative w-full pt-4">
+    <div className="relative w-full">
       <ShadcnTextarea
-        className="resize-none bg-secondary w-full rounded-2xl pr-12 pt-4 pb-16"
+        className="resize-none bg-white/5 backdrop-blur-sm text-white placeholder:text-white/50 w-full rounded-2xl pr-12 pt-4 pb-16 focus:ring-2 focus:ring-blue-400/50 border border-white/20 focus:border-blue-400/50 focus:bg-white/10 transition-all"
         value={input}
         autoFocus
         placeholder={"Say something..."}
@@ -44,18 +41,14 @@ export const Textarea = ({
           }
         }}
       />
-      <ModelPicker
-        setSelectedModel={setSelectedModel}
-        selectedModel={selectedModel}
-      />
       {status === "streaming" || status === "submitted" ? (
         <button
           type="button"
           onClick={stop}
-          className="cursor-pointer absolute right-2 bottom-2 rounded-full p-2 bg-black hover:bg-zinc-800 disabled:bg-zinc-300 disabled:cursor-not-allowed transition-colors"
+          className="cursor-pointer absolute right-3 bottom-3 rounded-full p-2.5 bg-red-500/20 backdrop-blur-sm border border-red-400/30 hover:bg-red-500/30 hover:scale-105 disabled:bg-zinc-300 disabled:cursor-not-allowed transition-all"
         >
           <div className="animate-spin h-4 w-4">
-            <svg className="h-4 w-4 text-white" viewBox="0 0 24 24">
+            <svg className="h-4 w-4 text-red-300" viewBox="0 0 24 24">
               <circle
                 className="opacity-25"
                 cx="12"
@@ -77,9 +70,9 @@ export const Textarea = ({
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="absolute right-2 bottom-2 rounded-full p-2 bg-black hover:bg-zinc-800 disabled:bg-zinc-300 disabled:dark:bg-zinc-700 dark:diasbled:opacity-80 disabled:cursor-not-allowed transition-colors"
+          className="absolute right-3 bottom-3 rounded-full p-2.5 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 hover:bg-blue-500/30 hover:scale-105 disabled:bg-zinc-600/20 disabled:border-zinc-500/20 disabled:cursor-not-allowed transition-all"
         >
-          <ArrowUp className="h-4 w-4 text-white" />
+          <ArrowUp className="h-4 w-4 text-blue-300" />
         </button>
       )}
     </div>

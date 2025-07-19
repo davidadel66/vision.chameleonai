@@ -10,8 +10,8 @@ export default function SideNav({ activeTab, onTabChange }: SideNavProps) {
   return (
     <div className="relative">
       <div className="w-20 h-full">
-        <div className="w-20 h-full bg-blue-500/10 backdrop-blur-lg border border-white/10">
-          <div className="flex flex-col h-full p-2">
+        <div className="w-20 h-full bg-black/30 backdrop-blur-xl border-l border-white/10 shadow-2xl">
+          <div className="flex flex-col h-full p-3">
             <nav className="flex-1 flex items-center">
               <div className="w-full">
                 <NavLinks activeTab={activeTab} onTabChange={onTabChange} />
