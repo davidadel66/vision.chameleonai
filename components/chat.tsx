@@ -2,7 +2,6 @@
 
 import { defaultModel, modelID } from "@/ai/providers";
 import { useChat } from "@ai-sdk/react";
-import { useState } from "react";
 import { Textarea } from "./textarea";
 import { Messages } from "./messages";
 import { toast } from "sonner";
