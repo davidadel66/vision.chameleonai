@@ -41,7 +41,7 @@ export default function Chat() {
               Start a conversation
             </h2>
             <p className="text-white/60 text-base leading-relaxed">
-              Ask me anything about your data, trading insights, or market analysis. I'm here to help you make informed decisions.
+              Ask me anything about your data, trading insights, or market analysis. Im here to help you make informed decisions.
             </p>
           </div>
         </div>
