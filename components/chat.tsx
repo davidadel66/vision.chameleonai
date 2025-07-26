@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { defaultModel, modelID } from "@/ai/providers";
-import { useChat } from "@ai-sdk/react";
-import { Textarea } from "./textarea";
-import { Messages } from "./messages";
-import { toast } from "sonner";
-import { SparklesIcon } from "lucide-react";
+import { defaultModel, modelID } from '@/ai/providers';
+import { useChat } from '@ai-sdk/react';
+import { Textarea } from './textarea';
+import { Messages } from './messages';
+import { toast } from 'sonner';
+import { SparklesIcon } from 'lucide-react';
 
 export default function Chat() {
   const selectedModel: modelID = defaultModel;
@@ -15,17 +15,17 @@ export default function Chat() {
       body: {
         selectedModel,
       },
-      onError: (error) => {
+      onError: error => {
         toast.error(
           error.message.length > 0
             ? error.message
-            : "An error occured, please try again later.",
-          { position: "top-center", richColors: true },
+            : 'An error occured, please try again later.',
+          { position: 'top-center', richColors: true }
         );
       },
     });
 
-  const isLoading = status === "streaming" || status === "submitted";
+  const isLoading = status === 'streaming' || status === 'submitted';
 
   return (
     <div className="h-full flex flex-col w-full">
@@ -41,7 +41,8 @@ export default function Chat() {
               Start a conversation
             </h2>
             <p className="text-white/60 text-base leading-relaxed">
-              Ask me anything about your data, trading insights, or market analysis. Im here to help you make informed decisions.
+              Ask me anything about your data, trading insights, or market
+              analysis. Im here to help you make informed decisions.
             </p>
           </div>
         </div>

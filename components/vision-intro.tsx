@@ -6,5 +6,5 @@ export const VisionIntro = () => {
         Your Personal Risk and Portfolio Management Agent
       </p>
     </div>
-  )
-}
+  );
+};

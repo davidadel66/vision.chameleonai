@@ -1,7 +1,6 @@
 import { modelID } from '@/ai/providers';
 import { Textarea as ShadcnTextarea } from '@/components/ui/textarea';
-import { ArrowUp } from "lucide-react";
-
+import { ArrowUp } from 'lucide-react';
 
 interface InputProps {
   input: string;
@@ -10,7 +9,6 @@ interface InputProps {
   status: string;
   stop: () => void;
   selectedModel: modelID;
-
 }
 
 export const Textarea = ({
@@ -26,21 +24,21 @@ export const Textarea = ({
         className="resize-none bg-white/5 backdrop-blur-sm text-white placeholder:text-white/50 w-full rounded-2xl pr-12 pt-4 pb-16 focus:ring-2 focus:ring-blue-400/50 border border-white/20 focus:border-blue-400/50 focus:bg-white/10 transition-all"
         value={input}
         autoFocus
-        placeholder={"Say something..."}
+        placeholder={'Say something...'}
         // @ts-expect-error err
         onChange={handleInputChange}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
+        onKeyDown={e => {
+          if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             if (input.trim() && !isLoading) {
               // @ts-expect-error-err
-              const form = e.target.closest("form");
+              const form = e.target.closest('form');
               if (form) form.requestSubmit();
             }
           }
         }}
       />
-      {status === "streaming" || status === "submitted" ? (
+      {status === 'streaming' || status === 'submitted' ? (
         <button
           type="button"
           onClick={stop}

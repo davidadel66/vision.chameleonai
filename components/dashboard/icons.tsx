@@ -18,7 +18,7 @@ const iconMap: Record<IconName, { src: string; alt: string }> = {
 
 export function Icon({ name, className, width = 48, height = 48 }: IconProps) {
   const iconInfo = iconMap[name];
-  
+
   return (
     <Image
       src={iconInfo.src}
@@ -30,7 +30,15 @@ export function Icon({ name, className, width = 48, height = 48 }: IconProps) {
   );
 }
 
-export const HomeIcon = (props: Omit<IconProps, 'name'>) => <Icon name="home" {...props} />;
-export const CryptoIcon = (props: Omit<IconProps, 'name'>) => <Icon name="crypto" {...props} />;
-export const ScreenerIcon = (props: Omit<IconProps, 'name'>) => <Icon name="screener" {...props} />;
-export const EventsIcon = (props: Omit<IconProps, 'name'>) => <Icon name="events" {...props} />; 
+export const HomeIcon = (props: Omit<IconProps, 'name'>) => (
+  <Icon name="home" {...props} />
+);
+export const CryptoIcon = (props: Omit<IconProps, 'name'>) => (
+  <Icon name="crypto" {...props} />
+);
+export const ScreenerIcon = (props: Omit<IconProps, 'name'>) => (
+  <Icon name="screener" {...props} />
+);
+export const EventsIcon = (props: Omit<IconProps, 'name'>) => (
+  <Icon name="events" {...props} />
+);

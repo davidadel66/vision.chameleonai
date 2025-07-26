@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import type { Message as TMessage } from "ai";
-import { AnimatePresence, motion } from "motion/react";
-import { memo, useCallback, useEffect, useState } from "react";
-import equal from "fast-deep-equal";
+import type { Message as TMessage } from 'ai';
+import { AnimatePresence, motion } from 'motion/react';
+import { memo, useCallback, useEffect, useState } from 'react';
+import equal from 'fast-deep-equal';
 
-import { Markdown } from "./markdown";
-import { cn } from "@/lib/utils";
+import { Markdown } from './markdown';
+import { cn } from '@/lib/utils';
 import {
   CheckCircle,
   ChevronDownIcon,
@@ -15,13 +15,14 @@ import {
   PocketKnife,
   SparklesIcon,
   StopCircle,
-} from "lucide-react";
-import { SpinnerIcon } from "./icon";
+} from 'lucide-react';
+import { SpinnerIcon } from './icon';
+import { useCharts } from '@/lib/chart-context';
 
 interface ReasoningPart {
-  type: "reasoning";
+  type: 'reasoning';
   reasoning: string;
-  details: Array<{ type: "text"; text: string }>;
+  details: Array<{ type: 'text'; text: string }>;
 }
 
 interface ReasoningMessagePartProps {
@@ -43,9 +44,9 @@ export function ReasoningMessagePart({
       marginBottom: 0,
     },
     expanded: {
-      height: "auto",
+      height: 'auto',
       opacity: 1,
-      marginTop: "1rem",
+      marginTop: '1rem',
       marginBottom: 0,
     },
   };
@@ -72,10 +73,10 @@ export function ReasoningMessagePart({
           <div className="font-medium text-sm">Reasoned for a few seconds</div>
           <button
             className={cn(
-              "cursor-pointer rounded-full dark:hover:bg-zinc-800 hover:bg-zinc-200",
+              'cursor-pointer rounded-full dark:hover:bg-zinc-800 hover:bg-zinc-200',
               {
-                "dark:bg-zinc-800 bg-zinc-200": isExpanded,
-              },
+                'dark:bg-zinc-800 bg-zinc-200': isExpanded,
+              }
             )}
             onClick={() => {
               setIsExpanded(!isExpanded);
@@ -99,14 +100,14 @@ export function ReasoningMessagePart({
             animate="expanded"
             exit="collapsed"
             variants={variants}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
           >
             {part.details.map((detail, detailIndex) =>
-              detail.type === "text" ? (
+              detail.type === 'text' ? (
                 <Markdown key={detailIndex}>{detail.text}</Markdown>
               ) : (
-                "<redacted>"
-              ),
+                '<redacted>'
+              )
             )}
           </motion.div>
         )}
@@ -122,9 +123,36 @@ const PurePreviewMessage = ({
 }: {
   message: TMessage;
   isLoading: boolean;
-  status: "error" | "submitted" | "streaming" | "ready";
+  status: 'error' | 'submitted' | 'streaming' | 'ready';
   isLatestMessage: boolean;
 }) => {
+  const { addChart } = useCharts();
+
+  // Check for stock chart data in tool results and add to context
+  useEffect(() => {
+    if (message.parts) {
+      message.parts.forEach(part => {
+        if (
+          part.type === 'tool-invocation' &&
+          part.toolInvocation.state === 'result' &&
+          part.toolInvocation.toolName === 'stockData' &&
+          part.toolInvocation.result &&
+          typeof part.toolInvocation.result === 'object' &&
+          'type' in part.toolInvocation.result &&
+          part.toolInvocation.result.type === 'stock-chart'
+        ) {
+          // console.log('📊 Found stock chart data, adding to context:', part.toolInvocation.result);
+          addChart({
+            ticker: part.toolInvocation.result.ticker,
+            startDate: part.toolInvocation.result.startDate,
+            endDate: part.toolInvocation.result.endDate,
+            data: part.toolInvocation.result.data,
+          });
+        }
+      });
+    }
+  }, [message.id, message.parts, addChart]); // addChart is now stable with useCallback
+
   return (
     <AnimatePresence key={message.id}>
       <motion.div
@@ -136,11 +164,11 @@ const PurePreviewMessage = ({
       >
         <div
           className={cn(
-            "flex gap-4 w-full group-data-[role=user]/message:ml-auto group-data-[role=user]/message:max-w-2xl",
-            "group-data-[role=user]/message:w-fit group-data-[role=user]/message:flex-row-reverse",
+            'flex gap-4 w-full group-data-[role=user]/message:ml-auto group-data-[role=user]/message:max-w-2xl',
+            'group-data-[role=user]/message:w-fit group-data-[role=user]/message:flex-row-reverse'
           )}
         >
-          {message.role === "assistant" && (
+          {message.role === 'assistant' && (
             <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-white/20 bg-blue-500/20 backdrop-blur-sm">
               <div className="">
                 <SparklesIcon size={14} className="text-blue-300" />
@@ -148,7 +176,7 @@ const PurePreviewMessage = ({
             </div>
           )}
 
-          {message.role === "user" && (
+          {message.role === 'user' && (
             <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-white/20 bg-green-500/20 backdrop-blur-sm">
               <div className="w-4 h-4 rounded-full bg-green-400"></div>
             </div>
@@ -157,7 +185,7 @@ const PurePreviewMessage = ({
           <div className="flex flex-col w-full space-y-4">
             {message.parts?.map((part, i) => {
               switch (part.type) {
-                case "text":
+                case 'text':
                   return (
                     <motion.div
                       initial={{ y: 5, opacity: 0 }}
@@ -166,17 +194,17 @@ const PurePreviewMessage = ({
                       className="flex flex-row gap-2 items-start w-full pb-4"
                     >
                       <div
-                        className={cn("flex flex-col gap-4", {
-                          "bg-green-500/10 backdrop-blur-sm text-white px-4 py-3 rounded-2xl border border-green-400/20":
-                            message.role === "user",
-                          "text-white/90": message.role === "assistant",
+                        className={cn('flex flex-col gap-4', {
+                          'bg-green-500/10 backdrop-blur-sm text-white px-4 py-3 rounded-2xl border border-green-400/20':
+                            message.role === 'user',
+                          'text-white/90': message.role === 'assistant',
                         })}
                       >
                         <Markdown>{part.text}</Markdown>
                       </div>
                     </motion.div>
                   );
-                case "tool-invocation":
+                case 'tool-invocation':
                   const { toolName, state } = part.toolInvocation;
 
                   return (
@@ -192,27 +220,27 @@ const PurePreviewMessage = ({
                         </div>
                         <div className="flex-1">
                           <div className="font-medium flex items-baseline gap-2">
-                            {state === "call" ? "Calling" : "Called"}{" "}
+                            {state === 'call' ? 'Calling' : 'Called'}{' '}
                             <span className="font-mono bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded-md">
                               {toolName}
                             </span>
                           </div>
                         </div>
                         <div className="w-5 h-5 flex items-center justify-center">
-                          {state === "call" ? (
-                            isLatestMessage && status !== "ready" ? (
+                          {state === 'call' ? (
+                            isLatestMessage && status !== 'ready' ? (
                               <Loader2 className="animate-spin h-4 w-4 text-zinc-500" />
                             ) : (
                               <StopCircle className="h-4 w-4 text-red-500" />
                             )
-                          ) : state === "result" ? (
+                          ) : state === 'result' ? (
                             <CheckCircle size={14} className="text-green-600" />
                           ) : null}
                         </div>
                       </div>
                     </motion.div>
                   );
-                case "reasoning":
+                case 'reasoning':
                   return (
                     <ReasoningMessagePart
                       key={`message-${message.id}-${i}`}
@@ -220,7 +248,7 @@ const PurePreviewMessage = ({
                       part={part}
                       isReasoning={
                         (message.parts &&
-                          status === "streaming" &&
+                          status === 'streaming' &&
                           i === message.parts.length - 1) ??
                         false
                       }
@@ -245,5 +273,4 @@ export const Message = memo(PurePreviewMessage, (prevProps, nextProps) => {
   if (!equal(prevProps.message.parts, nextProps.message.parts)) return false;
 
   return true;
-}
-)
+});

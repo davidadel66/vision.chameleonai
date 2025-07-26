@@ -1,5 +1,5 @@
-"use client";
-import { modelID, MODELS } from "@/ai/providers";
+'use client';
+import { modelID, MODELS } from '@/ai/providers';
 import {
   Select,
   SelectContent,
@@ -7,7 +7,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from './ui/select';
 
 interface ModelPickerProps {
   selectedModel: modelID;
@@ -26,7 +26,7 @@ export const ModelPicker = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {MODELS.map((modelId) => (
+            {MODELS.map(modelId => (
               <SelectItem key={modelId} value={modelId}>
                 {modelId}
               </SelectItem>

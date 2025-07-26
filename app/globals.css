@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --font-size: 14px;
@@ -22,20 +22,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-semibold tracking-tight;
-  }
-
-  p, span {
-    @apply font-sans text-base leading-relaxed;
-  }
-}
-
 body {
   @apply bg-gradient-to-br from-red-950 via-blue-950 to-purple-950 font-sans;
 }
@@ -49,12 +35,12 @@ html {
     font-size: 12rem;
     line-height: 1;
   }
-  
+
   .text-11xl {
     font-size: 14rem;
     line-height: 1;
   }
-  
+
   .text-12xl {
     font-size: 16rem;
     line-height: 1;
