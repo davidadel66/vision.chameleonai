@@ -22,10 +22,13 @@ export const stockDataTool = tool({
   }),
   execute: async ({ ticker, startDate, endDate }) => {
     try {
-      // Make request to your FastAPI endpoint
+      const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}`
+        : process.env.NODE_ENV === 'development' ? 'https://localhost:3000'
+        : 'https://vision-chameleonai-43i5vpe1s-david-rezkallas-projects.vercel.app';
+
       const response = await fetch(
-        `http://localhost:8000/overview/${ticker}/daily_historical/${startDate}/${endDate}`
-      );
+        `${baseUrl}/api/overview/${ticker}/daily_historical/${startDate}/${endDate}`
+      )
 
       if (!response.ok) {
         throw new Error(`Failed to fetch stock data: ${response.statusText}`);
